@@ -21,8 +21,8 @@ conexao.connect((err) => {
 const sql = `
   CREATE TABLE IF NOT EXISTS produtos (
     nome VARCHAR(100) NOT NULL PRIMARY KEY,
-    preco DECIMAL (10, 2) NOT NULL,
-    estoque INT NULL,
+    preco DECIMAL (10, 2) UNSIGNED NOT NULL,
+    estoque INT UNSIGNED,
     categoria VARCHAR(100) NULL,
     descricao VARCHAR(100) NULL
     
