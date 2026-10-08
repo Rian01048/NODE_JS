@@ -9,6 +9,6 @@ Você precisará instalar o `mysql2` (para comunicar com o banco) e o `dotenv` (
 No terminal, rode os comandos:
 
 ```bash
-npm i mysql2
+npm i mysql
 npm i mysql2 dotenv
 npm init -y
