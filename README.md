@@ -10,5 +10,6 @@ No terminal, rode os comandos:
 
 ```bash
 npm i mysql
+npm i mysql2
 npm i mysql2 dotenv
 npm init -y
