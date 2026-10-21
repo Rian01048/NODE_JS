@@ -13,3 +13,12 @@ npm i mysql
 npm i mysql2
 npm i mysql2 dotenv
 npm init -y
+```
+
+## Em uma situação onde usou o SSMS, as dependências são:
+```bash
+npm i mssql
+npm i express mssql
+npm i express mssql dotenv
+npm init -y
+
