@@ -5,65 +5,66 @@ const app = express()
 app.use(express.json())
 
 
-app.post('/criar-registro', (req, res) => {
+app.post('/produtos', (req, res) => {
     const nome = 'XBOX ONE S'
-    const preco = 2500
-    const quantidade = 10
+    const preco = 2399.90
+    const quantidade = 100
 
-    const query = `INSERT INTO Produtos (Nome, Preco, Quantidade) VALUES ('${nome}', '${preco}', '${quantidade}')`
+    const sql = `INSERT INTO Produtos (Nome, Preco, Quantidade) VALUES ('${nome}', '${preco}', '${quantidade}')`
 
-    conexao.query(query, (err) => {
+    conexao.query(sql, (err) => {
         if (err) return res.status(500).json({ erro: 'Erro ao salvar.' })
         res.status(201).json({ mensagem: 'Criado com sucesso!' })
     })
 })
 
 
-app.get('/listar-registros', (req, res) => {
-    const query = 'SELECT * FROM Produtos';
 
-    conexao.query(query, (err, result) => {
-        if (err) {
-            console.log('Erro no banco:', err);
-            return res.status(500).json({ erro: 'Erro ao buscar dados.' });
-        }
 
-        res.status(200).json(result.recordset);
-    });
-});
+app.get('/produtos', (req, res) => {
+    const sql = 'SELECT * FROM Produtos'
+
+    conexao.query(sql, (err, result) => {
+        if (err) return res.status(500).json({ erro: err.message });
+        res.status(200).json(result.recordset)
+    })
+})
 
 
 
-app.get('/atualizar-registro', (req, res) => {
-    const id = 1
+
+app.put('/produtos/:id', (req, res) => {
+    const id = req.params.id
     const novoNome = 'Sabonete'
     const novoPreco = 2.90
     const novaQuantidade = 7
-    const query = `UPDATE Produtos SET Nome = '${novoNome}', Preco = ${novoPreco}, Quantidade = ${novaQuantidade} WHERE Id = ${id}`
 
-    console.log("Query executada:", query)
+    const sql = `UPDATE Produtos SET Nome = '${novoNome}', Preco = ${novoPreco}, Quantidade = ${novaQuantidade} WHERE Id = ${id}`
 
-    conexao.query(query, (err, resultados) => {
+    conexao.query(sql, (err, resultados) => {
         if (err) {
-            console.error("Erro retornado pelo banco:", err)
-            return res.status(500).json({ erro: 'Erro ao atualizar.' })
+            console.error("Erro retornado pelo banco:", err);
+            return res.status(500).json({ erro: 'Erro ao atualizar.' });
         }
 
-        console.log("Linhas alteradas:", resultados.affectedRows)
-
-        res.status(200).json({ mensagem: 'Atualizado' })
+        console.log("Linhas alteradas:", resultados.affectedRows);
+        res.status(200).json({ mensagem: 'Atualizado' });
     })
 })
 
-app.get('/deletar-registro', (req, res) => {
-    const id = 1
-    const query = `DELETE FROM Produtos WHERE Id = ${id}`
 
-    conexao.query(query, (err) => {
-        if (err) return res.status(500).json({ erro: 'Erro ao deletar.' })
-        res.status(200).json({ mensagem: 'Deletado' })
+
+
+app.delete('/produtos/:id', (req, res) => {
+    const id = req.params.id
+    const sql = `DELETE FROM Produtos WHERE Id = ${id}`
+
+    conexao.query(sql, (err) => {
+        if (err) return res.status(500).json({ erro: err.message })
+        res.status(200).json({ mensagem: 'Produto deletado' });
     })
 })
+
 
 
 
