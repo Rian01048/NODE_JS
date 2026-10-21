@@ -21,4 +21,6 @@ npm i mssql
 npm i express mssql
 npm i express mssql dotenv
 npm init -y
+```
 
+## Foi utilizado uma extensão chamada THUNDER CLIENT para fazer todo o CRUD com GET, POST com a execução da API
